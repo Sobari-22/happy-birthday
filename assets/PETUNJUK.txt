@@ -1,0 +1,8 @@
+Taruh file kamu di folder ini dengan nama persis seperti berikut:
+
+  photo1.jpg
+  photo2.jpg
+  photo3.jpg
+  birthday-song.mp3
+
+Setelah file ditaruh, hapus saja file PETUNJUK.txt ini (boleh juga dibiarkan).

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FBF6EC">
+
+  <!-- GANTI: judul tab browser -->
+  <title>Happy Birthday, Nyong!</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ ORNAMEN BUNGA (SVG) ============
+       Dipakai ulang lewat <use href="#nama">. Warna kelopak bisa diubah
+       lewat style="--petal:#warna" pada elemen svg/use yang memakainya. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+  <!-- Kelopak bunga (5 kelopak) -->
+  <g id="petal">
+    <ellipse cx="50" cy="27" rx="15" ry="23" style="fill:var(--petal,#D9A9A3)"/>
+    <ellipse cx="50" cy="23" rx="5" ry="11" fill="#fff" opacity=".28"/>
+  </g>
+  <symbol id="flower" viewBox="0 0 100 100">
+    <use href="#petal"/>
+    <use href="#petal" transform="rotate(72 50 50)"/>
+    <use href="#petal" transform="rotate(144 50 50)"/>
+    <use href="#petal" transform="rotate(216 50 50)"/>
+    <use href="#petal" transform="rotate(288 50 50)"/>
+    <circle cx="50" cy="50" r="11" style="fill:var(--center,#E3C28D)"/>
+    <circle cx="47" cy="47" r="3.5" fill="#fff" opacity=".35"/>
+  </symbol>
+
+  <!-- Bunga daisy (10 kelopak tipis) -->
+  <ellipse id="dpetal" cx="50" cy="23" rx="6.5" ry="20" style="fill:var(--petal2,#FFFDF8);stroke:#E3D3BC;stroke-width:1"/>
+  <symbol id="daisy" viewBox="0 0 100 100">
+    <use href="#dpetal"/>
+    <use href="#dpetal" transform="rotate(36 50 50)"/>
+    <use href="#dpetal" transform="rotate(72 50 50)"/>
+    <use href="#dpetal" transform="rotate(108 50 50)"/>
+    <use href="#dpetal" transform="rotate(144 50 50)"/>
+    <use href="#dpetal" transform="rotate(180 50 50)"/>
+    <use href="#dpetal" transform="rotate(216 50 50)"/>
+    <use href="#dpetal" transform="rotate(252 50 50)"/>
+    <use href="#dpetal" transform="rotate(288 50 50)"/>
+    <use href="#dpetal" transform="rotate(324 50 50)"/>
+    <circle cx="50" cy="50" r="10" style="fill:var(--center2,#C9A06A)"/>
+  </symbol>
+
+  <!-- Ranting dengan daun -->
+  <symbol id="sprig" viewBox="0 0 130 40">
+    <path d="M2 6 Q60 38 128 18" fill="none" stroke="#B08F75" stroke-width="2" stroke-linecap="round"/>
+    <g style="fill:var(--leaf,#D9C7AE)">
+      <ellipse cx="30.6"  cy="9.7"  rx="5" ry="11" transform="rotate(40 30.6 9.7)"/>
+      <ellipse cx="55"    cy="30.3" rx="5" ry="11" transform="rotate(140 55 30.3)"/>
+      <ellipse cx="80.2"  cy="18.7" rx="5" ry="11" transform="rotate(40 80.2 18.7)"/>
+      <ellipse cx="106.2" cy="30.9" rx="5" ry="11" transform="rotate(140 106.2 30.9)"/>
+      <ellipse cx="121"   cy="17.5" rx="4.5" ry="9" transform="rotate(90 121 17.5)"/>
+    </g>
+  </symbol>
+
+  <!-- Rangkaian sudut: bunga + ranting -->
+  <symbol id="corner" viewBox="0 0 220 220">
+    <use href="#sprig" x="8" y="6" width="190" height="58"/>
+    <use href="#sprig" x="8" y="6" width="190" height="58" transform="matrix(0 1 1 0 0 0)"/>
+    <use href="#daisy" x="84" y="12" width="44" height="44"/>
+    <use href="#daisy" x="12" y="84" width="44" height="44"/>
+    <use href="#flower" x="4" y="4" width="80" height="80"/>
+    <use href="#flower" x="62" y="62" width="38" height="38" style="--petal:#F0DAD5;--center:#D9B68A"/>
+    <use href="#flower" x="118" y="8" width="30" height="30" style="--petal:#EBDFCC;--center:#D9A9A3"/>
+    <use href="#flower" x="8" y="118" width="30" height="30" style="--petal:#EBDFCC;--center:#D9A9A3"/>
+  </symbol>
+
+  <!-- Pembatas antar bagian: bunga di tengah, ranting ke kiri-kanan -->
+  <symbol id="divider" viewBox="0 0 240 40">
+    <g transform="translate(240 0) scale(-1 1)"><use href="#sprig" x="142" y="6" width="95" height="29"/></g>
+    <use href="#sprig" x="142" y="6" width="95" height="29"/>
+    <use href="#flower" x="98" y="0" width="44" height="44"/>
+    <use href="#daisy" x="78" y="10" width="24" height="24"/>
+    <use href="#daisy" x="138" y="10" width="24" height="24"/>
+  </symbol>
+</defs>
+
+  </svg>
+
+  <!-- Kelopak yang jatuh pelan di latar belakang (hapus div ini kalau tidak mau) -->
+  <div class="petals" aria-hidden="true"><span style="--x:6%;--s:12px;--d:17s;--delay:-2s;--c:var(--pink)"></span><span style="--x:18%;--s:9px;--d:21s;--delay:-9s;--c:var(--pink-soft)"></span><span style="--x:31%;--s:14px;--d:19s;--delay:-5s;--c:var(--pink-soft)"></span><span style="--x:45%;--s:10px;--d:23s;--delay:-14s;--c:var(--pink)"></span><span style="--x:58%;--s:13px;--d:18s;--delay:-7s;--c:var(--sand)"></span><span style="--x:71%;--s:9px;--d:22s;--delay:-11s;--c:var(--pink)"></span><span style="--x:84%;--s:12px;--d:20s;--delay:-3s;--c:var(--pink-soft)"></span><span style="--x:93%;--s:10px;--d:24s;--delay:-16s;--c:var(--sand)"></span></div>
+
+  <!-- ============ 1. OPENING ============ -->
+  <section id="opening" class="opening">
+    <svg class="deco deco--tl" viewBox="0 0 220 220" aria-hidden="true"><use href="#corner"/></svg>
+    <svg class="deco deco--br" viewBox="0 0 220 220" aria-hidden="true"><use href="#corner"/></svg>
+    <div class="opening__inner">
+
+      <div class="opening__text">
+        <!-- GANTI: nama panggilan (Nyong) kalau perlu -->
+        <h1 class="opening__title">Happy Birthday, Nyong! 🎂</h1>
+        <p class="opening__sub">There's a little message for you.</p>
+      </div>
+
+      <!-- ============ AMPLOP ============
+           Bisa diklik langsung, atau lewat tombol "Open Message" di bawahnya. -->
+      <div class="envelope-wrap">
+        <div class="envelope" id="envelope" aria-hidden="true">
+          <div class="envelope__back"></div>
+
+          <!-- Surat kecil yang naik keluar dari amplop -->
+          <div class="envelope__letter">
+            <svg class="envelope__letter-flower" viewBox="0 0 100 100"><use href="#flower"/></svg>
+            <p class="envelope__letter-title">Untuk Nyong</p>
+            <span class="envelope__letter-lines"></span>
+          </div>
+
+          <!-- Bagian depan amplop (kantong) -->
+          <div class="envelope__front">
+            <svg viewBox="0 0 170 110" preserveAspectRatio="none">
+              <polygon points="0,0 85,57 0,110"     fill="#F2E6D3" stroke="#E0CFB6" stroke-width=".8"/>
+              <polygon points="170,0 85,57 170,110" fill="#EEDFCA" stroke="#E0CFB6" stroke-width=".8"/>
+              <polygon points="0,110 85,57 170,110" fill="#F7EEDF" stroke="#E0CFB6" stroke-width=".8"/>
+            </svg>
+          </div>
+
+          <!-- GANTI: tulisan di depan amplop -->
+          <p class="envelope__to">To: Nyong</p>
+
+          <!-- Penutup amplop (tutup berwarna dusty pink) -->
+          <div class="envelope__flap">
+            <svg class="flap__face flap__face--out" viewBox="0 0 170 58" preserveAspectRatio="none">
+              <polygon points="0,0 170,0 85,58" fill="#DDB1AB" stroke="#C9928C" stroke-width="1" stroke-linejoin="round"/>
+            </svg>
+            <svg class="flap__face flap__face--in" viewBox="0 0 170 58" preserveAspectRatio="none">
+              <polygon points="0,0 170,0 85,58" fill="#F0DAD5" stroke="#E2BFB8" stroke-width="1" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Segel bunga kecil -->
+          <div class="envelope__seal">
+            <svg viewBox="0 0 100 100" style="--petal:#FBF6EC;--center:#E3C28D"><use href="#flower"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="opening__action">
+        <button id="openBtn" class="btn" type="button">Open Message</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ISI KARTU (muncul setelah tombol diklik) ============ -->
+  <div id="card" class="card" hidden>
+    <svg class="deco deco--tl" viewBox="0 0 220 220" aria-hidden="true"><use href="#corner"/></svg>
+    <svg class="deco deco--br" viewBox="0 0 220 220" aria-hidden="true"><use href="#corner"/></svg>
+
+    <!-- ============ 2. BIRTHDAY MESSAGE ============ -->
+    <section class="section">
+      <article class="letter">
+        <svg class="letter__flower letter__flower--tr" viewBox="0 0 100 100" aria-hidden="true"><use href="#flower"/></svg>
+        <svg class="letter__flower letter__flower--tr2" viewBox="0 0 100 100" aria-hidden="true" style="--petal:#F0DAD5;--center:#D9B68A"><use href="#flower"/></svg>
+        <svg class="letter__flower letter__flower--bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#daisy"/></svg>
+        <svg class="letter__flower letter__flower--bl2" viewBox="0 0 100 100" aria-hidden="true" style="--petal:#EBDFCC;--center:#D9A9A3"><use href="#flower"/></svg>
+        <h2 class="letter__title">Untuk Nyong</h2>
+
+        <!-- GANTI: isi pesan. Satu <p> = satu paragraf -->
+        <p>Selamat ulang tahun ya, Nyong.</p>
+
+        <p>Semoga di umur yang baru ini Nyong selalu diberikan kesehatan, kebahagiaan, dan kemudahan dalam setiap urusan.</p>
+
+        <p>Semoga kuliah di ITERA berjalan lancar, dimudahkan dalam menjalani setiap prosesnya, dipertemukan dengan banyak orang baik, dan semua yang Nyong cita-citakan bisa tercapai.</p>
+
+        <p>Tetap semangat, jaga kesehatan, jangan lupa istirahat, dan nikmati setiap proses yang sedang Nyong jalani.</p>
+
+        <p>Semoga tahun ini membawa banyak hal baik dan cerita baru.</p>
+
+        <p>Have a great birthday, Nyong.<br>Semoga hari ini menyenangkan.</p>
+      </article>
+    </section>
+
+    <!-- ============ 3. SMALL MEMORY ============ -->
+    <section class="section memory">
+      <svg class="divider" viewBox="0 0 240 40" aria-hidden="true"><use href="#divider"/></svg>
+      <h2 class="section__title">Some good memories.</h2>
+      <p class="section__caption">Just a few moments worth remembering.</p>
+
+      <div class="gallery">
+        <!-- GANTI: foto. Taruh file di folder assets/ dengan nama yang sama.
+             Mau tambah foto? Salin satu blok <figure> lalu ganti nama file-nya.
+             Isi alt dengan deskripsi singkat foto. -->
+        <figure class="photo" data-file="photo1.jpg">
+          <img src="assets/photo1.jpg" alt="Foto bersama 1" loading="lazy">
+          <svg class="photo__flower" viewBox="0 0 100 100" aria-hidden="true"><use href="#flower"/></svg>
+        </figure>
+
+        <figure class="photo" data-file="photo2.jpg">
+          <img src="assets/photo2.jpg" alt="Foto bersama 2" loading="lazy">
+          <svg class="photo__flower" viewBox="0 0 100 100" aria-hidden="true"><use href="#daisy"/></svg>
+        </figure>
+
+        <figure class="photo" data-file="photo3.jpg">
+          <img src="assets/photo3.jpg" alt="Foto bersama 3" loading="lazy">
+          <svg class="photo__flower" viewBox="0 0 100 100" aria-hidden="true"><use href="#flower"/></svg>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ 4. WISHES ============ -->
+    <section class="section wishes">
+      <h2 class="visually-hidden">Wishes</h2>
+      <div class="wishes__list">
+        <!-- GANTI: teks harapan kalau mau -->
+        <div class="wish"><svg class="wish__icon" viewBox="0 0 100 100" aria-hidden="true"><use href="#flower"/></svg>Good health</div>
+        <div class="wish"><svg class="wish__icon" viewBox="0 0 100 100" aria-hidden="true"><use href="#daisy"/></svg>Good people</div>
+        <div class="wish"><svg class="wish__icon" viewBox="0 0 100 100" aria-hidden="true"><use href="#flower"/></svg>Good days</div>
+        <div class="wish"><svg class="wish__icon" viewBox="0 0 100 100" aria-hidden="true"><use href="#daisy"/></svg>Good memories</div>
+        <div class="wish"><svg class="wish__icon" viewBox="0 0 100 100" aria-hidden="true"><use href="#flower"/></svg>Good things ahead</div>
+      </div>
+    </section>
+
+    <!-- ============ 5. FINAL MESSAGE ============ -->
+    <section class="section final">
+      <svg class="divider" viewBox="0 0 240 40" aria-hidden="true"><use href="#divider"/></svg>
+      <h2 class="final__title">Once again, Happy Birthday, Nyong! 🤍</h2>
+      <p class="final__text">Semoga semua yang sedang Nyong perjuangkan dipermudah dan diberi hasil terbaik.</p>
+      <p class="final__text">Take care and enjoy your day.</p>
+      <!-- GANTI: tanda tangan kalau mau (mis. "— Bang Bayu") -->
+      <p class="final__sign">— Abang</p>
+    </section>
+
+  </div>
+
+  <!-- ============ MUSIK ============ -->
+  <!-- GANTI: file lagu = assets/birthday-song.mp3 (nama file bisa diubah di src di bawah) -->
+  <audio id="bgm" src="assets/birthday-song.mp3" loop preload="auto"></audio>
+
+  <button id="musicBtn" class="music" type="button" aria-label="Putar musik" aria-pressed="false" hidden>
+    <svg class="music__icon music__icon--play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+      <path d="M8 5.5v13l11-6.5z" fill="currentColor"/>
+    </svg>
+    <svg class="music__icon music__icon--pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+      <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

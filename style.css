@@ -1,0 +1,613 @@
+/* =========================================================
+   WARNA & FONT — ubah di sini kalau mau ganti suasana
+   ========================================================= */
+:root {
+  --cream: #FBF6EC;        /* latar utama */
+  --paper: #FFFDF8;        /* kertas surat */
+  --beige: #EBDFCC;        /* beige lembut */
+  --sand: #D9C7AE;         /* garis / bingkai */
+  --pink: #D9A9A3;         /* dusty pink (aksen) */
+  --pink-deep: #C58F89;    /* dusty pink hover */
+  --pink-soft: #F0DAD5;    /* dusty pink sangat muda */
+  --brown: #7A5842;        /* cokelat muda */
+  --ink: #4A382C;          /* warna teks utama */
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--cream);
+  background-image: radial-gradient(70% 45% at 50% 0%, var(--pink-soft) 0%, rgba(240, 218, 213, 0) 70%);
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+h1, h2, p { margin: 0; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   TOMBOL
+   ========================================================= */
+.btn {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--pink);
+  border: 0;
+  border-radius: 999px;
+  padding: 0.85rem 2rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(122, 88, 66, 0.18);
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover { background: var(--pink-deep); transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+:focus-visible {
+  outline: 3px solid var(--brown);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   1. OPENING
+   ========================================================= */
+.opening {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.opening.is-leaving { opacity: 0; transform: translateY(-12px); pointer-events: none; }
+
+.opening__inner { max-width: 30rem; }
+
+.opening__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.3rem, 10vw, 3.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--brown);
+}
+
+.opening__sub {
+  margin: 1rem 0 2.2rem;
+  font-size: 1.1rem;
+  color: var(--ink);
+  opacity: 0.8;
+}
+
+/* Satu momen animasi masuk: judul -> subteks -> tombol */
+.opening__title,
+.opening__sub,
+.opening .btn {
+  opacity: 0;
+  animation: rise 0.9s ease forwards;
+}
+.opening__title { animation-delay: 0.15s; }
+.opening__sub   { animation-delay: 0.7s; }
+.opening .btn   { animation-delay: 1.8s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   ISI KARTU
+   ========================================================= */
+.card {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+}
+
+.section { margin-top: 4.5rem; }
+.section:first-child { margin-top: 1rem; }
+
+.section__title,
+.final__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--brown);
+  line-height: 1.2;
+  text-align: center;
+}
+.section__title { font-size: clamp(1.7rem, 6vw, 2.2rem); }
+
+.section__caption {
+  margin-top: 0.6rem;
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* =========================================================
+   2. SURAT
+   ========================================================= */
+.letter {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--beige);
+  border-radius: 6px;
+  padding: 2.6rem 1.6rem 2.2rem;
+  box-shadow: 0 18px 40px rgba(122, 88, 66, 0.12), 0 2px 0 var(--beige);
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  line-height: 1.85;
+  max-width: 34rem;
+  margin: 0 auto;
+}
+
+/* pita kecil dusty pink di atas kertas */
+.letter::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 7rem;
+  height: 1.7rem;
+  background: var(--pink);
+  opacity: 0.85;
+  transform: translateX(-50%) rotate(-2deg);
+  border-radius: 2px;
+}
+
+.letter__title {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--brown);
+  margin-bottom: 1.4rem;
+}
+
+.letter p + p { margin-top: 1.1rem; }
+
+/* surat membuka dengan lembut setelah tombol diklik */
+.card.is-open .letter {
+  animation: unfold 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes unfold {
+  from { opacity: 0; transform: translateY(28px) rotate(-1.2deg) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) rotate(0) scale(1); }
+}
+
+/* =========================================================
+   3. GALERI FOTO
+   ========================================================= */
+.gallery {
+  margin-top: 2.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.6rem 1.4rem;
+}
+
+.photo {
+  position: relative;
+  margin: 0;
+  width: min(15rem, 78vw);
+  padding: 0.7rem 0.7rem 2rem;
+  background: var(--paper);
+  border: 1px solid var(--beige);
+  box-shadow: 0 10px 24px rgba(122, 88, 66, 0.14);
+  transition: transform 0.3s ease;
+}
+.photo:nth-child(1) { transform: rotate(-2.5deg); }
+.photo:nth-child(2) { transform: rotate(1.8deg); }
+.photo:nth-child(3) { transform: rotate(-1.2deg); }
+.photo:hover { transform: rotate(0) scale(1.03); }
+
+.photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--beige);
+}
+
+/* Kalau file foto belum ada: tampil kotak beige berisi nama file */
+.photo.is-missing img { display: none; }
+.photo.is-missing::before {
+  content: attr(data-file);
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  background: var(--beige);
+  color: var(--brown);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 639px) {
+  .gallery { flex-direction: column; align-items: center; }
+  .photo:nth-child(odd)  { margin-right: 1.5rem; }
+  .photo:nth-child(even) { margin-left: 1.5rem; }
+}
+
+/* =========================================================
+   4. WISHES
+   ========================================================= */
+.wishes__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.wish {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--ink);
+  background: var(--beige);
+  padding: 0.9rem 1.5rem;
+  border-radius: 18px 18px 18px 6px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.wish:nth-child(even) { background: var(--pink-soft); border-radius: 18px 18px 6px 18px; }
+.wish:nth-child(3)    { background: var(--paper); border: 1px solid var(--sand); border-radius: 999px; }
+
+.wish:hover,
+.wish:active {
+  transform: translateY(-4px) rotate(-1deg);
+  box-shadow: 0 10px 20px rgba(122, 88, 66, 0.15);
+}
+
+/* =========================================================
+   5. FINAL
+   ========================================================= */
+.final { text-align: center; }
+.final__title { font-size: clamp(1.6rem, 6vw, 2.1rem); }
+.final__text { margin-top: 1.2rem; max-width: 28rem; margin-left: auto; margin-right: auto; }
+.final__text:last-of-type { margin-top: 1rem; }
+
+.final__sign {
+  margin-top: 2.2rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--brown);
+}
+
+/* =========================================================
+   TOMBOL MUSIK (Play / Pause)
+   ========================================================= */
+.music {
+  z-index: 5;
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  color: var(--brown);
+  background: var(--paper);
+  border: 1px solid var(--sand);
+  border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(122, 88, 66, 0.18);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.music:hover { transform: scale(1.06); background: var(--pink-soft); }
+
+.music__icon--pause { display: none; }
+.music.is-playing .music__icon--play  { display: none; }
+.music.is-playing .music__icon--pause { display: block; }
+
+/* =========================================================
+   Hormati pengaturan "kurangi gerakan"
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   ORNAMEN BUNGA
+   ========================================================= */
+body { position: relative; overflow-x: hidden; }
+
+/* Konten selalu di atas ornamen latar */
+.opening, .card { position: relative; z-index: 1; }
+
+/* Bunga di sudut (halaman pembuka & kartu) */
+.deco {
+  position: absolute;
+  width: clamp(120px, 34vw, 230px);
+  height: auto;
+  pointer-events: none;
+  z-index: 0;
+}
+.deco--tl { top: 0; left: 0; transform-origin: 0 0; animation: sway 8s ease-in-out infinite alternate; }
+.deco--br { right: 0; bottom: 0; transform: rotate(180deg); transform-origin: 100% 100%; animation: sway-br 9s ease-in-out infinite alternate; }
+
+/* .opening sudah relative: sudut bunga mengikuti layar pembuka.
+   .card tidak diberi posisi, jadi sudutnya mengikuti halaman (body). */
+.card { position: static; }
+.card > :not(.deco) { position: relative; z-index: 1; }
+
+@keyframes sway    { from { transform: rotate(-1.8deg); } to { transform: rotate(1.8deg); } }
+@keyframes sway-br { from { transform: rotate(178.2deg); } to { transform: rotate(181.8deg); } }
+
+/* Beri ruang agar surat tidak menabrak bunga di sudut (layar HP) */
+.card { padding-top: 6.5rem; padding-bottom: 8rem; }
+@media (min-width: 640px) { .card { padding-top: 3rem; padding-bottom: 6rem; } }
+
+/* Pembatas antar bagian */
+.divider {
+  display: block;
+  width: min(15rem, 62vw);
+  height: auto;
+  margin: 0 auto 2rem;
+}
+.final .divider { margin-bottom: 1.6rem; }
+
+/* Kelopak jatuh pelan */
+.petals { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.petals span {
+  position: absolute;
+  top: -5vh;
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  background: var(--c);
+  border-radius: 100% 0 100% 0;
+  opacity: 0.6;
+  animation: petal-fall var(--d) linear var(--delay) infinite;
+}
+@keyframes petal-fall {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg); }
+  25%  { transform: translate3d(22px, 27vh, 0) rotate(90deg); }
+  50%  { transform: translate3d(-14px, 55vh, 0) rotate(190deg); }
+  75%  { transform: translate3d(20px, 82vh, 0) rotate(280deg); }
+  100% { transform: translate3d(-6px, 112vh, 0) rotate(370deg); }
+}
+
+/* Bunga menempel di tepi surat */
+.letter__flower { position: absolute; height: auto; pointer-events: none; }
+.letter__flower--tr  { width: 3.6rem; top: -1.3rem; right: -0.9rem; transform: rotate(14deg); }
+.letter__flower--tr2 { width: 2.1rem; top: 1.6rem;  right: -1.1rem; transform: rotate(-20deg); }
+.letter__flower--bl  { width: 3.2rem; bottom: -1.1rem; left: -0.9rem; transform: rotate(-10deg); }
+.letter__flower--bl2 { width: 2rem;   bottom: 1.8rem;  left: -1rem;   transform: rotate(25deg); }
+
+/* Bunga kecil + selotip di foto */
+.photo__flower { position: absolute; right: 0.7rem; bottom: 0.35rem; width: 1.5rem; height: auto; }
+.photo::after {
+  content: "";
+  position: absolute;
+  top: -0.6rem;
+  left: 50%;
+  width: 4.2rem;
+  height: 1.3rem;
+  background: var(--pink);
+  opacity: 0.75;
+  transform: translateX(-50%) rotate(-3deg);
+}
+.photo:nth-child(2)::after { background: var(--sand); transform: translateX(-50%) rotate(2.5deg); }
+.photo:nth-child(3)::after { background: var(--pink-soft); opacity: 0.95; transform: translateX(-50%) rotate(-1.5deg); }
+
+/* Ikon bunga di kartu wishes */
+.wish { display: inline-flex; align-items: center; gap: 0.6rem; }
+.wish__icon { width: 1.5rem; height: 1.5rem; flex: none; transition: transform 0.4s ease; }
+.wish:nth-child(1) .wish__icon { --petal: #D9A9A3; }
+.wish:nth-child(3) .wish__icon { --petal: #C9A06A; --center: #FFFDF8; }
+.wish:nth-child(5) .wish__icon { --petal: #B08F75; --center: #F0DAD5; }
+.wish:nth-child(2) .wish__icon,
+.wish:nth-child(4) .wish__icon { --petal2: #FFFDF8; --center2: #D9A9A3; }
+.wish:hover .wish__icon,
+.wish:active .wish__icon { transform: rotate(60deg) scale(1.12); }
+
+/* Latar dengan titik-titik halus supaya tidak polos */
+body {
+  background-image:
+    radial-gradient(70% 45% at 50% 0%, var(--pink-soft) 0%, rgba(240, 218, 213, 0) 70%),
+    radial-gradient(rgba(217, 199, 174, 0.45) 1px, transparent 1.5px);
+  background-size: auto, 26px 26px;
+  background-repeat: no-repeat, repeat;
+}
+
+/* Hormati pengaturan "kurangi gerakan" */
+@media (prefers-reduced-motion: reduce) {
+  .petals { display: none; }
+  .deco--tl, .deco--br { animation: none; }
+}
+
+
+/* =========================================================
+   AMPLOP (halaman pembuka)
+   ========================================================= */
+.opening__inner { position: relative; z-index: 1; width: 100%; }
+
+.opening__text,
+.opening__action { transition: opacity 0.5s ease, transform 0.5s ease; }
+
+.opening__sub { margin-bottom: 0; }
+
+/* Amplop masuk dari atas setelah teks muncul */
+.envelope-wrap {
+  width: min(17rem, 78vw);
+  margin: 4rem auto 2.4rem;
+  opacity: 0;
+  animation: drop-in 1s cubic-bezier(0.2, 0.8, 0.2, 1) 1.1s forwards;
+}
+@keyframes drop-in {
+  from { opacity: 0; transform: translateY(-18px) rotate(-3deg); }
+  to   { opacity: 1; transform: none; }
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 17 / 11;
+  perspective: 900px;
+  cursor: pointer;
+  animation: bob 4.5s ease-in-out 2.2s infinite alternate;
+}
+@keyframes bob {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-6px); }
+}
+
+.envelope__back {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #E4D4BC;
+  border-radius: 5px;
+  box-shadow: 0 16px 30px rgba(122, 88, 66, 0.22);
+}
+
+/* surat kecil di dalam amplop */
+.envelope__letter {
+  position: absolute;
+  z-index: 2;
+  left: 6%;
+  right: 6%;
+  top: 7%;
+  height: 86%;
+  padding: 0.7rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--paper);
+  border: 1px solid var(--beige);
+  border-radius: 3px;
+  transition: transform 0.9s cubic-bezier(0.3, 0.7, 0.2, 1) 0.5s;
+}
+.envelope__letter-flower { width: 1.4rem; height: 1.4rem; flex: none; }
+.envelope__letter-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--brown);
+}
+.envelope__letter-lines {
+  flex: 1;
+  width: 100%;
+  margin-top: 0.3rem;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 0.6rem,
+    var(--beige) 0.6rem calc(0.6rem + 2px)
+  );
+}
+
+/* kantong depan */
+.envelope__front {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: 5px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.envelope__front svg { display: block; width: 100%; height: 100%; }
+
+.envelope__to {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12%;
+  z-index: 4;
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--brown);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* penutup amplop */
+.envelope__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 54%;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.45, 0.05, 0.25, 1), z-index 0s 0.35s;
+  pointer-events: none;
+}
+.flap__face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flap__face--in { transform: rotateX(180deg); }
+
+/* segel bunga di ujung penutup */
+.envelope__seal {
+  position: absolute;
+  z-index: 6;
+  left: calc(50% - 1.35rem);
+  top: calc(54% - 1.6rem);
+  width: 2.7rem;
+  height: 2.7rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #D69E98, #B97C76);
+  box-shadow: 0 3px 6px rgba(80, 40, 30, 0.3), inset 0 0 0 3px rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+  transition: transform 0.35s ease, opacity 0.3s ease;
+}
+.envelope__seal svg { width: 1.5rem; height: 1.5rem; }
+
+/* penutup sedikit terangkat saat di-hover (penasaran) */
+@media (hover: hover) {
+  .opening:not(.is-opening) .envelope:hover .envelope__flap { transform: rotateX(14deg); }
+}
+
+/* ---------- Saat tombol / amplop diklik ---------- */
+.opening.is-opening .opening__text   { opacity: 0; transform: translateY(-14px); }
+.opening.is-opening .opening__action { opacity: 0; transform: translateY(10px); }
+.opening.is-opening .envelope        { animation-play-state: paused; cursor: default; }
+.opening.is-opening .envelope__flap  { transform: rotateX(180deg); z-index: 1; }
+.opening.is-opening .envelope__letter { transform: translateY(-64%); }
+.opening.is-opening .envelope__seal  { opacity: 0; transform: scale(0.4) rotate(40deg); }
+.opening.is-opening .envelope__to    { opacity: 0; }
+
+/* layar pendek: kecilkan sedikit supaya semuanya muat */
+@media (max-height: 640px) {
+  .envelope-wrap { width: min(14rem, 70vw); margin: 3rem auto 1.6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .envelope { animation: none; }
+}
